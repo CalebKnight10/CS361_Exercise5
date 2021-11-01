@@ -2,11 +2,10 @@
 
 class LaunchDiscussionWorkflow
 
-  def initialize(discussion, host, participants_email_string)
+  def initialize(discussion, host, participants)
     @discussion = discussion
     @host = host
-    @participants_email_string = participants_email_string
-    @participants = []
+    @participants = participants
   end
 
   # Expects @participants array to be filled with User objects
@@ -20,6 +19,17 @@ class LaunchDiscussionWorkflow
       end
     end
   end
+  # ...
+end
+
+
+class GenerateParticpantUsers
+
+  def initialize(participants_email_string)
+    @participants_email_string = participants_email_string
+    @participants = []
+  end
+
 
   def generate_participant_users_from_email_string
     return if @participants_email_string.blank?
@@ -27,9 +37,7 @@ class LaunchDiscussionWorkflow
       User.create(email: email_address.downcase, password: Devise.friendly_token)
     end
   end
-
   # ...
-
 end
 
 
@@ -40,3 +48,27 @@ participants = "fake1@example.com\nfake2@example.com\nfake3@example.com"
 workflow = LaunchDiscussionWorkflow.new(discussion, host, participants)
 workflow.generate_participant_users_from_email_string
 workflow.run
+
+
+class TestLaunchDiscussionWorkflow < Test::Unit::TestCase 
+
+  def test_run
+  end
+
+  def test_callbacks
+  end
+
+  def test_create_discussion_roles
+  end
+
+  def test_valid?
+  end
+
+end
+
+class TestGenerateParticipantUsers < Test::Unit::TestCase
+
+  def test_generate_participant_user_from_email_string
+  end
+
+end
