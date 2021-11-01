@@ -30,7 +30,6 @@ class GenerateParticpantUsers
     @participants = []
   end
 
-
   def generate_participant_users_from_email_string
     return if @participants_email_string.blank?
     @participants_email_string.split.uniq.map do |email_address|
@@ -65,6 +64,7 @@ class TestLaunchDiscussionWorkflow < Test::Unit::TestCase
   end
 
 end
+
 
 class TestGenerateParticipantUsers < Test::Unit::TestCase
 
